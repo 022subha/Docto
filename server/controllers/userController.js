@@ -29,7 +29,6 @@ export const loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
-    res.send(user);
     if (!user) {
       res.status(400).json({ message: "User doesn't exist!!" });
     }
