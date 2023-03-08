@@ -10,7 +10,5 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
 //* All routes setup
-app.use("/api", async (req, res) => {
-  res.json({ message: "Working Fine" });
-});
+app.use("/api", test);
 export default app;
