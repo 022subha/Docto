@@ -28,7 +28,8 @@ export const registerController = async (req, res, next) => {
 export const loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    let user = User.findOne({ email });
+    let user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       res.status(400).json({ message: "User doesn't exist!!" });
     }
