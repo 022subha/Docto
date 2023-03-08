@@ -7,7 +7,7 @@ export const registerController = async (req, res, next) => {
   const { email, name, password } = req.body;
   try {
     let user = User.findOne({ email });
-    if (!user) {
+    if (user) {
       return res
         .status(200)
         .json({ status: false, message: "User Already Exists!!" });
