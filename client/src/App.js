@@ -1,17 +1,32 @@
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Spinner from "./components/Spinner";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+
 function App() {
+  const [username, setUsername] = useState(null);
+  const { loading } = useSelector((state) => state.alerts);
+  useEffect(() => {
+    const token = Cookies.get("token");
+    setUsername(token);
+  }, []);
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </BrowserRouter>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home username={username} setUsername={setUsername} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      )}
     </>
   );
 }

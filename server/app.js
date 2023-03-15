@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 const app = express();
@@ -8,6 +9,7 @@ import userAuth from "./routes/userRoutes.js";
 //* Middlewares set-up
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(morgan("tiny"));
 
 //* All routes setup
