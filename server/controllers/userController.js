@@ -60,25 +60,24 @@ export const loginController = async (req, res, next) => {
 
 export const authController = async (req, res, next) => {
   try {
-    console.log(req.body);
     const user = await User.findOne({ _id: req.body.userId });
+    user.password = undefined;
     if (!user) {
       return res.status(200).send({
-        message: "user not found",
+        message: "User not Found",
         success: false,
       });
     } else {
-      res.status(200).send({
+      return res.status(200).send({
         success: true,
         data: {
-          name: user.name,
-          email: user.email,
+          user,
         },
       });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    return res.status(500).send({
       message: "auth error",
       success: false,
       error,

@@ -1,8 +1,11 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import Login from "./Login.js";
-import Register from "./Register.js";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Login from "../Login/Login.js";
+import Register from "../Register/Register.js";
+import "./Navbar.css";
 
 const customStyles = {
   content: {
@@ -10,9 +13,12 @@ const customStyles = {
     border: "0px",
   },
 };
-export default function Navbar({ username, setUsername }) {
+export default function Navbar({ setUsername }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [isDrop, setIsDrop] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  // const { isDrop } = useSelector((state) => state.dropdown);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -29,16 +35,29 @@ export default function Navbar({ username, setUsername }) {
       <div className="header">
         <img className="logo" src="/img/logo.svg" alt="" />
         <nav className="navigation">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/services">Services</a>
-          <a href="/contact">Contact</a>
-          {!username ? (
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact Us</Link>
+
+          {!user ? (
             <button className="btnLogin-popup" onClick={openModal}>
               Login
             </button>
           ) : (
-            <a href="/contact">{username}</a>
+            <>
+              <ion-icon name="notifications"></ion-icon>
+              <ion-icon name="person-circle"></ion-icon>
+
+              <Link
+                style={{ marginRight: "-60px" }}
+                onClick={() => {
+                  setIsDrop(!isDrop);
+                }}
+              >
+                {user.name}
+              </Link>
+              <ion-icon name={`chevron-${!isDrop ? "down" : "up"}`}></ion-icon>
+            </>
           )}
         </nav>
         {isLogin ? (

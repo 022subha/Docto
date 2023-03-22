@@ -1,32 +1,42 @@
 import { message } from "antd";
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { hideLoading, showLoading } from "../../redux/features/alertSlice";
+import "./Login.css";
 
-export default function Register({ closeModal, setIsLogin }) {
-  const [username, setUsername] = useState("");
+export default function Login({ closeModal, setIsLogin, setUsername }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      dispatch(showLoading());
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "http://localhost:5000/api/auth/login",
         {
-          username,
           email,
           password,
         }
       );
-      const { status } = response.data;
+      dispatch(hideLoading());
+      const { status, token } = response.data;
       if (status) {
-        message.success("User Registered Successfully!!");
+        const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        Cookies.set("token", token, { expires });
+        setUsername(token);
+        message.success("Login Successfully!!");
+        closeModal();
       } else {
-        message.error("User Already Exists!!");
+        message.error("Invalid Credentials!!");
       }
     } catch (err) {
+      dispatch(hideLoading());
       console.log(err);
-      message.error("Internal Server Error!!");
+      message.error("Internal Error");
     }
   };
 
@@ -37,7 +47,7 @@ export default function Register({ closeModal, setIsLogin }) {
           <ion-icon name="close" onClick={closeModal}></ion-icon>
         </span>
         <div className="form-box login">
-          <h2>Register</h2>
+          <h2>Login</h2>
           <form action="#">
             <div className="passport">
               <div className="log">
@@ -50,18 +60,6 @@ export default function Register({ closeModal, setIsLogin }) {
               </div>
             </div>
             <hr />
-            <div className="input-box">
-              <span className="icon">
-                <ion-icon name="person"></ion-icon>
-              </span>
-              <input
-                type="text"
-                placeholder="Username"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
-            </div>
             <div className="input-box">
               <span className="icon">
                 <ion-icon name="mail-open"></ion-icon>
@@ -86,14 +84,21 @@ export default function Register({ closeModal, setIsLogin }) {
                 }}
               />
             </div>
+            <div className="remember-forget">
+              <label>
+                <input type="checkbox" />
+                Remember Me
+              </label>
+              <a href="/forget-password">Forget Password?</a>
+            </div>
             <button
               type="submit"
               className="btn"
               onClick={(e) => {
-                handleRegister(e);
+                handleLogin(e);
               }}
             >
-              Register
+              Login
             </button>
             <div className="login-register">
               <p>
@@ -101,11 +106,11 @@ export default function Register({ closeModal, setIsLogin }) {
                 <span
                   className="register-link"
                   onClick={() => {
-                    setIsLogin(true);
+                    setIsLogin(false);
                   }}
                 >
                   {"  "}
-                  Login
+                  Register
                 </span>
               </p>
             </div>
