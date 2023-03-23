@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import DropDown from "../DropDown.js";
 import Login from "../Login/Login.js";
 import Register from "../Register/Register.js";
 import "./Navbar.css";
@@ -46,7 +47,12 @@ export default function Navbar({ setUsername }) {
           ) : (
             <>
               <ion-icon name="notifications"></ion-icon>
-              <ion-icon name="person-circle"></ion-icon>
+              <ion-icon
+                name="person-circle"
+                onClick={() => {
+                  setIsDrop(!isDrop);
+                }}
+              ></ion-icon>
 
               <Link
                 style={{ marginRight: "-60px" }}
@@ -56,7 +62,12 @@ export default function Navbar({ setUsername }) {
               >
                 {user.name}
               </Link>
-              <ion-icon name={`chevron-${!isDrop ? "down" : "up"}`}></ion-icon>
+              <ion-icon
+                name={`chevron-${!isDrop ? "down" : "up"}`}
+                onClick={() => {
+                  setIsDrop(!isDrop);
+                }}
+              ></ion-icon>
             </>
           )}
         </nav>
@@ -86,6 +97,9 @@ export default function Navbar({ setUsername }) {
           </Modal>
         )}
       </div>
+      {user && isDrop && (
+        <DropDown isDrop={isDrop} setIsDrop={setIsDrop} openModal={openModal} />
+      )}
     </>
   );
 }

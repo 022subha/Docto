@@ -12,3 +12,44 @@
   background-size: cover;
   background-position: center;
 }
+.dropdown {
+  position: absolute;
+  top: 70px;
+  right: 3rem;
+  width: 12rem;
+  padding: 15px;
+  border: 2px solid #000;
+  border-radius: 15px;
+  color: #000;
+  background-color: #d8d5d5;
+  z-index: 100;
+  list-style: none;
+}
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -0.65rem;
+  right: 8.4rem;
+  width: 20px;
+  height: 20px;
+  background-color: #d8d5d5;
+  transform: rotate(45deg);
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
+}
+
+.dropdown li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.dropdown li a {
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 15px;
+  color: #000;
+}
+.dropdown li a ion-icon {
+  margin-right: 10px;
+  margin-bottom: -2px;
+  font-size: 20px;
+}

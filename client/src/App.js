@@ -15,35 +15,36 @@ function App() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.alerts);
   const { user } = useSelector((state) => state.user);
-  const getUser = async () => {
-    try {
-      dispatch(showLoading());
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/userData",
-        {
-          token: Cookies.get("token"),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        }
-      );
-      dispatch(hideLoading());
 
-      if (response.data.success) {
-        dispatch(setUser(response.data.data.user));
-      }
-    } catch (error) {
-      dispatch(hideLoading());
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    const getUser = async () => {
+      try {
+        dispatch(showLoading());
+        const response = await axios.post(
+          "http://localhost:5000/api/auth/userData",
+          {
+            token: Cookies.get("token"),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
+        );
+        dispatch(hideLoading());
+
+        if (response.data.success) {
+          dispatch(setUser(response.data.data.user));
+        }
+      } catch (error) {
+        dispatch(hideLoading());
+        console.log(error);
+      }
+    };
     if (user == null) {
       getUser();
     }
-  }, []);
+  }, [user, dispatch]);
 
   return (
     <>

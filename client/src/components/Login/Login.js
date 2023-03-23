@@ -27,7 +27,6 @@ export default function Login({ closeModal, setIsLogin, setUsername }) {
       if (status) {
         const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
         Cookies.set("token", token, { expires });
-        setUsername(token);
         message.success("Login Successfully!!");
         closeModal();
       } else {
