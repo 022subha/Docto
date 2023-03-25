@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Spinner from "./components/Spinner";
 import Dashboard from "./pages/Dashboard";
+import AddDoctor from "./pages/Dashboard/AddDoctor";
 import Home from "./pages/Home";
 import { hideLoading, showLoading } from "./redux/features/alertSlice";
 import { setUser } from "./redux/features/userSlice";
@@ -65,6 +66,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/dashboard/add-doctor" element={<AddDoctor />} />
           </Routes>
         </BrowserRouter>
       )}

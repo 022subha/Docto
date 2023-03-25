@@ -2,26 +2,21 @@ export const SidebarMenu = [
   {
     name: "Home",
     path: "/",
-    icon: "fa-solid fa-house",
+    icon: "home",
   },
   {
-    name: "Appointments",
+    name: "Doctors",
     path: "/appointments",
-    icon: "fa-solid fa-list",
+    icon: "menu",
   },
   {
-    name: "Apply Doctor",
-    path: "/apply-doctor",
-    icon: "fa-solid fa-user-doctor",
+    name: "Add Doctor",
+    path: "/dashboard/add-doctor",
+    icon: "medkit",
   },
   {
     name: "Profile",
     path: "/profile",
-    icon: "fa-solid fa-user",
-  },
-  {
-    name: "Logout",
-    path: "/logout",
-    icon: "fa-solid fa-right-from-bracket",
+    icon: "person",
   },
 ];
