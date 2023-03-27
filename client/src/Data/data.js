@@ -6,7 +6,7 @@ export const SidebarMenu = [
   },
   {
     name: "Doctors",
-    path: "/appointments",
+    path: "/dashboard/doctors",
     icon: "menu",
   },
   {

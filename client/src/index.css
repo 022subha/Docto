@@ -99,10 +99,11 @@
 }
 
 .body {
-  height: 85vh;
+  height: 100%;
   margin-bottom: 20px;
   box-shadow: 0 0 2px gray;
   background-color: white;
+  padding: 30px;
 }
 
 .logo img {
