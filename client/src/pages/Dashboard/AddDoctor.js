@@ -12,7 +12,6 @@ const AddDoctor = () => {
   //handle form
   const handleFinish = async (values) => {
     try {
-      console.log(values);
       dispatch(showLoading());
       const response = await axios.post(
         "http://localhost:5000/api/add-doctor",

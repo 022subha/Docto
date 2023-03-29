@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Spinner from "./components/Spinner";
 import Dashboard from "./pages/Dashboard";
 import AddDoctor from "./pages/Dashboard/AddDoctor";
+import Doctors from "./pages/Dashboard/Doctors";
 import Home from "./pages/Home";
 import { hideLoading, showLoading } from "./redux/features/alertSlice";
 import { setUser } from "./redux/features/userSlice";
@@ -45,7 +46,7 @@ function App() {
     if (user == null) {
       getUser();
     }
-  }, [user, dispatch]);
+  }, []);
 
   return (
     <>
@@ -67,6 +68,7 @@ function App() {
               }
             />
             <Route path="/dashboard/add-doctor" element={<AddDoctor />} />
+            <Route path="/dashboard/doctors" element={<Doctors />} />
           </Routes>
         </BrowserRouter>
       )}

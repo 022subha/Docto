@@ -49,6 +49,18 @@ export const addDoctor = async (req, res) => {
   }
 };
 
+export const updateDoctor = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    console.log(req.body);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ status: false, message: "Internal Error !!" });
+  }
+};
+
 export const getDoctor = async (req, res) => {
   try {
     let doctors = await Doctor.find({});

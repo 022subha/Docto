@@ -137,3 +137,27 @@
 .active ion-icon {
   color: #000;
 }
+
+.card-container {
+  margin: 20px 20px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 40px 40px;
+  height: auto;
+  width: fit-content;
+}
+.card-header {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -20px;
+  width: 100%;
+}
+
+.card-container img {
+  border: 2px solid #000;
+  border-radius: 50%;
+  height: 4rem;
+  margin: 10px 10px;
+}

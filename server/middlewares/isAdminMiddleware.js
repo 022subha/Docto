@@ -9,8 +9,11 @@ const isAdminMiddleware = async (req, res, next) => {
           .status(200)
           .json({ success: false, message: "Authentication Failed!!" });
       } else {
-        req.body.userId = decode.id;
-        next();
+        if (decode.isAdmin) next();
+        else
+          return res
+            .status(201)
+            .json({ success: false, message: "Authentication Failed!!" });
       }
     });
   } catch (error) {
